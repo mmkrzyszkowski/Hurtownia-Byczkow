@@ -28,7 +28,9 @@ public class UserRole {
 	@JoinColumn(name="role_id")
 	private Role role;
 	
-	
+	public UserRole() {
+		
+	}
 
 	public UserRole(User user, Role role) {
 		this.user = user;

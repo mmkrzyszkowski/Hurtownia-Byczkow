@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:fragment="common-header">
     <meta charset="utf-8" />
@@ -56,10 +56,13 @@
                     <a href="#" class="nav-link">Koszyk</a>
                 </li>
                 <li>
-                    <a th:href="@{/login}" class="nav-link">Profil</a>
+                    <a  sec:authorize="isAnonymous()" th:href="@{/login}" class="nav-link">Profil</a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link">Wyloguj</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/myProfile}" class="nav-link">Profil</a>
+                </li>
+                <li>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="nav-link">Wyloguj</a>
                 </li>
             </ul>
         </nav>
