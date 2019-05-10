@@ -38,10 +38,10 @@
   							<div class="panel-group">
   								<div class="panel panel-default" style="border:none;">
   									<div class="panel-body" style="background-color:#ededed; margin-top:20px;">
-  										<form th:action="@{/updateUserInfo" method="post">
+  										<form th:action="@{/updateUserInfo}" method="post">
   											<input type="hidden" name="id" th:value="${user.id}" />
   											
-  											<div class="bg-info" th:if="${updateUserInfo">Dane użytkownika zaktualizowane.</div>
+  											<div class="bg-info" th:if="${updateUserInfo}">Dane użytkownika zaktualizowane.</div>
   											
   											<div class="form-group">
   												<div class="row">
