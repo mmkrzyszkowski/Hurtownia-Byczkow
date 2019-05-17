@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<div class="row">
+		<form class="form-horizontal" th:action="@{/wine/add}" method="post" enctype="multipart/form-data">
+		<fieldset>
+			<legend class="center-block">Nowe Wino</legend><span style="font-size:small"> pola z * są wymagane</span>
+		
+			<!-- title -->
+			<div class="form-group">
+                <label class="col-md-2 control-label" for="name">* Nazwa</label>
+                <div class="col-md-8">
+				<input
+					type="text" name="name" class="form-control" id="name" th:value="${wine.name}" required="required"
+					placeholder="Nazwa" />
+					<span class="help-block">Nazwa trunku</span>
+                </div>
+			</div>
+			
+			<!-- author -->
+			<div class="form-group">
+                <label class="col-md-2 control-label" for="manufacturer">Producent</label>
+                <div class="col-md-8">
+				<input
+					type="text" name="manufacturer" class="form-control" id="manufacturer" th:value="${wine.manufacturer}" required="required"
+					placeholder="Producent" />
+					<span class="help-block">Producent</span>
+                </div>
+			</div>
+
+			
+			<!-- publication date -->
+			<div class="form-group">
+                <label class="col-md-2 control-label" for="productionDate">Data produkcji</label>
+
+                <div class="col-md-8">
+                    <input
+					type="date" name="productionDate" class="form-control" id="productionDate" th:value="${wine.productionDate}"
+					placeholder="Data Produkcji" />
+					<span class="help-block">Im starsze tym lepsze</span>
+                </div>
+			</div>
+			
+			<!-- language -->
+			<div class="form-group">
+                <label class="col-md-2 control-label"  for="country">Kraj pochodzenia</label>
+                <div class="col-md-8">
+					<select th:value="${wine.country}" id="country" name="country" class="form-control">
+						<option value="polska">Polska</option>
+						<option value="rosja">Rosja</option>
+					</select>
+				</div> 
+			</div>
+			
+			<!-- category -->
+			<div class="form-group">
+                <label class="col-md-2 control-label"  for="color">* Kolor</label>
+                <div class="col-md-8">
+					<select th:value="${wine.color}" id="color" name="color" class="form-control">
+						<option value="" selected="selected" disabled="disabled">Wybierz.</option>
+						<option value="Białe" th:selected="(${wine.color}=='Białe')">Białe</option>
+						<option value="Różowe" th:selected="(${wine.color}=='Różowe')">Różowe</option>
+						<option value="Czerwone" th:selected="(${wine.color}=='Czerwone')">Czerwone</option>
+						<option value="Siarkowe" th:selected="(${wine.color}=='Siarkowe')">Siarkowe</option>
+
+					</select>
+				</div> 
+			</div>
+
+			<!-- shipping weight -->
+			<div class="form-group">
+                <label class="col-md-2 control-label"  for="shippingWeight">Waga do przesyłki</label>
+                <div class="col-md-8">
+					<div class="input-group">
+						<input th:value="${wine.shippingWeight}" type="number" name="shippingWeight"
+							   class="form-control" id="shippingWeight"
+							   placeholder="Waga do przesyłki" />
+						<span class="input-group-addon">gram(ów)</span>
+					</div>
+					<span class="help-block">Waga dla kuriera w gramach</span>
+				</div>
+			</div>
+
+			<!-- list price -->
+			<div class="form-group">
+                <label class="col-md-2 control-label"  for="listPrice">Cena katalogowa</label>
+                <div class="col-md-8">
+					<div class="input-group">
+						<span class="input-group-addon">$</span>
+						<input th:value="${wine.listPrice}" type="number" name="listPrice"
+							   class="form-control" id="listPrice"
+							   placeholder="Cena katalogowa" />
+					</div>
+					<span class="help-block">Cena katalogowa butelki wina</span>
+				</div>
+			</div>
+			<!-- our price -->
+			<div class="form-group">
+                <label class="col-md-2 control-label"  for="ourPrice">Nasza cena</label>
+                <div class="col-md-8">
+					<div class="input-group">
+						<span class="input-group-addon">$</span>
+						<input th:value="${wine.ourPrice}" type="number" name="ourPrice"
+							   class="form-control" id="ourPrice"
+							   placeholder="Nasza cena" />
+					</div>
+					<span class="help-block">Nasza cena butelki wina</span>
+				</div>
+			</div>
+
+			<!-- in stock number -->
+			<div class="form-group">
+                <label class="col-md-2 control-label"  for="inStockNumber">Ilość na magazynie</label>
+                <div class="col-md-8">
+					<input th:value="${wine.inStockNumber}" type="number" name="inStockNumber"
+						   class="form-control" id="inStockNumber"
+						   placeholder="Ilość butelek" />
+					<span class="help-block">Ilość butelek na magazynie</span>
+				</div>
+			</div>
+
+
+			<!-- description -->
+			<div class="form-group">
+                <label class="col-md-2 control-label"  for="description">Opis</label>
+                <div class="col-md-8">
+                <textarea name="description" rows="5"
+						  class="form-control" id="description" th:value="${wine.description}"
+						  placeholder="Opis" /> <span class="help-block">czy kopie nieźle i czy wali siarą</span>
+                </div>
+			</div>
+
+			<!-- upload image -->
+			<div class="form-group">
+
+                    <label class="col-md-2 control-label"  for="wineImage">Dodaj zdjęcie butelki</label>
+
+                <div class="col-md-8">
+					<input id="wineImage" type="file" name="wineImage" th:value="${wine.wineImage}" />
+				</div>
+			</div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <button type="submit" class="btn btn-success">Dodaj wino</button>
+                    <a class="btn btn-danger" th:href="@{/}">Anuluj</a>
+                </div>
+            </div>
+			</fieldset>
+		</form>
+</div>
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>
