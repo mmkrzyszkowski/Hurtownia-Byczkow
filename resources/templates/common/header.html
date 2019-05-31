@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:fragment="common-header">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+    <title>Hurtownia Byczków</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/non-responsive.css" />
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet" />
+
+    <link rel="icon" href="/image/icon.jpg" />
+</head>
+
+<body>
+    <div th:fragment="navbar">
+        <div class="page-top" style="width:100%; height:20px; background-color: #f46b42;">
+
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Hurtownia byczków</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:href="@{/hurtowniashelf}" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wina</a>
+                            
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/hurtowniashelf}">Lista win</a>
+                            <a class="dropdown-item" href="#">Kontakt</a>
+                            <a class="dropdown-item" href="#">FAQ</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <form class="navbar-form">
+                <div class="form-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="Wyszukaj..." />
+                    <button type="submit" class="btn btn-success">Szukaj</button>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="nav-link">Koszyk</a>
+                </li>
+                <li>
+                    <a  sec:authorize="isAnonymous()" th:href="@{/login}" class="nav-link">Profil</a>
+                </li>
+                <li>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/myProfile}" class="nav-link">Profil</a>
+                </li>
+                <li>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="nav-link">Wyloguj</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div th:fragment="body-bottom-scripts">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </div>
+</body>
+
+</html>
