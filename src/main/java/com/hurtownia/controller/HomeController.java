@@ -1,11 +1,15 @@
 package com.hurtownia.controller;
 
+import java.security.Principal;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -22,9 +26,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hurtownia.domain.User;
+import com.hurtownia.domain.Wine;
 import com.hurtownia.domain.security.PasswordResetToken;
 import com.hurtownia.domain.security.Role;
 import com.hurtownia.domain.security.UserRole;
+import com.hurtownia.service.HurtowniaService;
 import com.hurtownia.service.UserService;
 import com.hurtownia.service.impl.UserSecurityService;
 import com.hurtownia.utility.MailConstructor;
@@ -45,6 +51,10 @@ public class HomeController {
 	@Autowired
 	private UserSecurityService userSecurityService;
 	
+	@Autowired
+	private HurtowniaService hurtowniaService;
+	
+	
 	@RequestMapping("/")
 	public String index () {
 		return "index";
@@ -59,6 +69,35 @@ public class HomeController {
 	public String login(Model model) {
 		model.addAttribute("classActiveLogin", "active");
 		return "myAccount";
+	}
+	
+	@RequestMapping("/hurtowniashelf")
+	public String hurtowniashelf(Model model) {
+		List<Wine> wineList = hurtowniaService.findAll();
+		model.addAttribute("wineList", wineList);
+		 return "hurtowniashelf";
+	}
+	
+	@RequestMapping("/wineDetail")
+	public String WineDetail(
+			@PathParam("id") Long id, Model model, Principal principal
+			) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			model.addAttribute("user", user);
+		}
+		
+		Wine wine = hurtowniaService.findOne(id);
+		
+		model.addAttribute("wine", wine);
+		
+		List<Integer> qtyList = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		model.addAttribute("qtyList", qtyList);
+		model.addAttribute("qty", 1);
+		
+		return "WineDetail";
 	}
 	
 	@RequestMapping("/forgetPassword")
