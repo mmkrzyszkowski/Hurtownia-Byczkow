@@ -1,6 +1,7 @@
 package com.hurtownia.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hurtownia.domain.ShoppingCart;
 import com.hurtownia.domain.User;
+import com.hurtownia.domain.UserBilling;
+import com.hurtownia.domain.UserPayment;
+import com.hurtownia.domain.UserShipping;
 import com.hurtownia.domain.security.PasswordResetToken;
 import com.hurtownia.domain.security.UserRole;
 import com.hurtownia.repository.PasswordResetTokenRepository;
 import com.hurtownia.repository.RoleRepository;
+import com.hurtownia.repository.UserPaymentRepository;
 import com.hurtownia.repository.UserRepository;
+import com.hurtownia.repository.UserShippingRepository;
 import com.hurtownia.service.UserService;
 
 @Service
@@ -24,6 +30,12 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private UserPaymentRepository userPaymentRepository;
+	
+	@Autowired
+	private UserShippingRepository userShippingRepository;
 	
 	
 	@Autowired
@@ -83,4 +95,53 @@ public class UserServiceImpl implements UserService{
 	public User save (User user) {
 		return userRepository.save(user);
 	}
+	
+	@Override
+	public void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user) {
+		userPayment.setUser(user);
+		userPayment.setUserBilling(userBilling);
+		userPayment.setDefaultPayment(true);
+		userBilling.setUserPayment(userPayment);
+		user.getUserPaymentList().add(userPayment);
+		save(user);
+	}
+	
+	@Override
+	public void updateUserShipping(UserShipping userShipping, User user){
+		userShipping.setUser(user);
+		userShipping.setUserShippingDefault(true);
+		user.getUserShippingList().add(userShipping);
+		save(user);
+	}
+	
+	@Override
+	public void setUserDefaultPayment(Long userPaymentId, User user) {
+		List<UserPayment> userPaymentList = (List<UserPayment>) userPaymentRepository.findAll();
+		
+		for (UserPayment userPayment : userPaymentList) {
+			if(userPayment.getId() == userPaymentId) {
+				userPayment.setDefaultPayment(true);
+				userPaymentRepository.save(userPayment);
+			} else {
+				userPayment.setDefaultPayment(false);
+				userPaymentRepository.save(userPayment);
+			}
+		}
+	}
+	
+	@Override
+	public void setUserDefaultShipping(Long userShippingId, User user) {
+		List<UserShipping> userShippingList = (List<UserShipping>) userShippingRepository.findAll();
+		
+		for (UserShipping userShipping : userShippingList) {
+			if(userShipping.getId() == userShippingId) {
+				userShipping.setUserShippingDefault(true);
+				userShippingRepository.save(userShipping);
+			} else {
+				userShipping.setUserShippingDefault(false);
+				userShippingRepository.save(userShipping);
+			}
+		}
+	}
+
 }
