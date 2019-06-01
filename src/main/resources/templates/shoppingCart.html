@@ -39,13 +39,13 @@
   						</div>
   						<br/><br/>
   						<div class="row">
-  							<div class="cols-xs-8"><h4>Produkty</h4></div>
-  							<div class="cols-xs-2"><h4>Cena</h4><</div>
-  							<div class="cols-xs-2"><h4>Ilość</h4><</div>
+  							<div class="col-xs-8"><h4>Produkty</h4></div>
+  							<div class="col-xs-2"><h4>Cena</h4><</div>
+  							<div class="col-xs-2"><h4>Ilość</h4><</div>
   						</div>
   						
   						<!--              displays product in cart                -->
-  						<div class="row" th:each="cartItem: $cartItemList">
+  						<div class="row" th:each="cartItem: ${cartItemList}">
   							<form th:action="@{/shoppingCart/updateCartItem}" method="post">
   								<hr/>
   								<div class="col-xs-2">
@@ -63,7 +63,7 @@
   									th:style="${cartItem.wine.inStockNumber}==0? 'text-decoration: line-through' : ''"></span></h5>
   								</div>
   								
-  								<div class="cols-xs-2">
+  								<div class="col-xs-2">
   									<input hidden="hidden" name="id" th:value="${cartItem.id}"/>
   									<input th:id="${cartItem.id" th:name="qty" th:disabled="${cartItem.wine.inStockNumber==0}"
   									class="form-control cartItemQty" th:value="${cartItem.qty}"/>
@@ -75,10 +75,10 @@
   						
   						<div class="row">
   						<hr/>
-  						<h4 class="col-xs-12 text-right"><strong style="font-size:large;">Całkowita cena
-  						(<span th:text="${#lists.size(cartItemList)}"></span> produkty):</strong>
-  						<span style="color:#db3208; font-size:large;">zł<span th:text="$shoppingCart.grandTotal">
-  						</span></span></h4>
+  						<h4 class="col-xs-12 text-right"><strong style="font-size:large;">Całkowita kwota zamówienia
+  						<!-- (<span th:text="${#lists.size(cartItemList)}"></span> produkty):</strong> -->
+  						<span style="color:#db3208; font-size:large;"> <span th:text="${shoppingCart.grandTotal}"> </span> zł 
+  						</span></h4>
   						
   						</div>
   					</div>
