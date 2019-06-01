@@ -1,10 +1,13 @@
 package com.hurtownia.service.impl;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.hurtownia.domain.ShoppingCart;
 import com.hurtownia.domain.User;
 import com.hurtownia.domain.security.PasswordResetToken;
 import com.hurtownia.domain.security.UserRole;
@@ -48,6 +51,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
+	@Transactional
 	public User createUser(User user, Set<UserRole> userRoles) throws Exception{
 		User localUser = userRepository.findByUsername(user.getUsername());
 		
@@ -61,6 +65,14 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		user.getUserRoles().addAll(userRoles);
+		
+		ShoppingCart shoppingCart = new ShoppingCart();
+		shoppingCart.setUser(user);
+		user.setShoppingCart(shoppingCart);
+		
+//		user.setUserShippingList(new ArrayList<UserShipping>());
+		
+//		user.setUserPaymentList(new ArrayList<UserPayment>());
 		
 		localUser = userRepository.save(user);
 		

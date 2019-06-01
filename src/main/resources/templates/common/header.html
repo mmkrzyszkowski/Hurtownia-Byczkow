@@ -52,7 +52,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" class="nav-link">Koszyk</a>
+                    <a th:href="@{/shoppingCart/cart}" class="nav-link">Koszyk</a>
                 </li>
                 <li>
                     <a  sec:authorize="isAnonymous()" th:href="@{/login}" class="nav-link">Profil</a>
