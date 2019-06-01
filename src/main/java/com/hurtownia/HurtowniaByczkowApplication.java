@@ -26,19 +26,19 @@ public class HurtowniaByczkowApplication implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-		User user1 = new User();
-		user1.setFirstName("John");
-		user1.setLastName("Adams");
-		user1.setUsername("test1");
-		user1.setPassword(SecurityUtility.passwordEncoder().encode("test1"));
-		user1.setEmail("mig210@tlen.pl");
-		Set<UserRole> userRoles = new HashSet<>();
-		Role role1 = new Role ();
-		role1.setRoleID(2);
-		role1.setName("ROLE_USER");
-		userRoles.add(new UserRole(user1, role1));
-
-		userService.createUser(user1, userRoles);
+//		User user1 = new User();
+//		user1.setFirstName("John");
+//		user1.setLastName("Adams");
+//		user1.setUsername("test1");
+//		user1.setPassword(SecurityUtility.passwordEncoder().encode("test1"));
+//		user1.setEmail("mig210@tlen.pl");
+//		Set<UserRole> userRoles = new HashSet<>();
+//		Role role1 = new Role ();
+//		role1.setRoleID(2);
+//		role1.setName("ROLE_USER");
+//		userRoles.add(new UserRole(user1, role1));
+//
+//		userService.createUser(user1, userRoles);
 	}
 
 }

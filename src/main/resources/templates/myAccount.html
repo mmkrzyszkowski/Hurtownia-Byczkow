@@ -10,15 +10,12 @@
   		<div class="row" style="margin-bottm: -100px;">
   			<div class="col-xs-8"> </div>
   				
-  			<div class="col-xs-3">
-  				<img src="/image/logo.png" class="img-responsive" /> <!--  tu trzeba dać logo -->
-  				<h2 class="section-headline">
-  					<span>User Account</span>
-  				</h2> 
+  			<div align="right">
+  				<img src="/image/logo.png" class="img-responsive" width="13%" height="13%" align="right"/> <!--  tu trzeba dać logo -->
   			</div>
-  			<hr style ="position:absolute; width:100%; background-color: #333; z-index:-2; margin-top: -100px;"/>
-  			
-  			<img class="img-responsive" src="/image/panel.png" style="margin-top: -100px"/> <!--  tu trzeba dać obraz do panelu -->
+  			<hr style ="position:absolute; width:100%; background-color: #333; z-index:-1; margin-top: -10px;"/>
+  	
+  			<img class="img-responsive" src="/image/panel.png" style="margin-top: 20px"/>
   			
   			<div class="row"  style="margin-top: 60px;"> 
   				<div class="col-xs-9 col-xs-offset-3:">
@@ -27,7 +24,7 @@
   					<ul class="nav nav-tabs">
   						<li th:classappend="${classActiveNewAccount}? 'active'"><a href="#tab-1" data-toggle="tab"><span style="color:#241f20;"> Stwórz nowe konto</span></a></li>
   						<li th:classappend="${classActiveLogin}? 'active'"><a href="#tab-2" data-toggle="tab"><span style="color:#241f20;"> Zaloguj się</span></a></li>
-  						<li th:classappend="${classActiveForgetPassword}? 'active'"><a href="#tab-3" data-toggle="tab"><span style="color:#241f20;"> Zapmniałem/-am hasła</span></a></li>
+  						<li th:classappend="${classActiveForgetPassword}? 'active'"><a href="#tab-3" data-toggle="tab"><span style="color:#241f20;"> Zapomniałem/-am hasła</span></a></li>
   					</ul>
   					
   					<!-- Tab panels -->
