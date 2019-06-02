@@ -126,12 +126,11 @@
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item active"><a
 											th:href="@{/listOfCreditCards}"
-											th:style="${listOfCreditCards}? 'color:red'">List of
-												Credit Cards</a></li>
+											th:style="${listOfCreditCards}? 'color:red'">Twoje karty płatnicze</a></li>
 										<li class="breadcrumb-item active"><a
 											th:href="@{/addNewCreditCard}"
-											th:style="${addNewCreditCard}? 'color:red'">Add(Update)
-												Credit Card</a></li>
+											th:style="${addNewCreditCard}? 'color:red'">Dodaj(Zaktualizuj)
+												kartę płatniczą</a></li>
 									</ol>
 
 									<div th:if="${listOfCreditCards}">
@@ -139,9 +138,9 @@
 											<table class="table">
 												<thead>
 													<tr>
-														<th>Default</th>
-														<th>Credit Card</th>
-														<th>Operations</th>
+														<th>Domyślna</th>
+														<th>Karta płatnicza</th>
+														<th>Operacje</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -158,7 +157,7 @@
 													</tr>
 												</tbody>
 											</table>
-											<button class="btn btn-primary" type="submit">Save</button>
+											<button class="btn btn-primary" type="submit">Zapisz</button>
 										</form>
 									</div>
 
